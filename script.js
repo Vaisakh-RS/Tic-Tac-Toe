@@ -1,6 +1,5 @@
-
+//To create the board
 const gameBoard=(()=>{
-
     const boardDiv=document.getElementById("board");
     var board=[[" "," "," "],
                [" "," "," "],
@@ -24,16 +23,13 @@ const gameBoard=(()=>{
     return {board,createBoard,getCell: () => cell};
 })();
 
-
+//Creates player object
 const Player=(name,symbol)=>{
     return{name,symbol};
 
 };
 
-
-
 const displayController=(()=>{
-
    const player1=Player("Player 1","X");
    const player2=Player("Player 2","O");
 
@@ -44,20 +40,27 @@ const displayController=(()=>{
     
         cells.forEach((cell,index)=>{
             cell.addEventListener("click",()=>{
-    
                 if (currentPlayer=== player1) {
                     if(updateBoard(index,"X"))
                     {
                         cell.textContent = "X";
                         currentPlayer = player2;
+                        console.log(gameBoard.board);
+                        if(checkWin(gameBoard.board,"X"))
+                        {
+                            console.log("Player 1 won");
+                        }
                     }
-                  
-
                 } else {
                     if(updateBoard(index,"O"))
                     {
                         cell.textContent = "O";
                         currentPlayer = player1;
+                        console.log(gameBoard.board);
+                        if(checkWin(gameBoard.board,"O"))
+                        {
+                            console.log("Player 2 won");
+                        }
                     }
                   
                 }
@@ -66,6 +69,8 @@ const displayController=(()=>{
         });
        
    }
+
+  
 
 //To check if the araay index is empty and insert the symbol into the board array
    function updateBoard(index, symbol) {
@@ -81,6 +86,30 @@ const displayController=(()=>{
     }
         
    }
+
+   function checkWin(board,playerSymbol)
+   {
+        const winCombo=[[0,1,2],[3,4,5],[6,7,8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6] ];
+
+        for (const combination of winCombo){
+            const[a,b,c]=combination;
+
+            const cellA = board[Math.floor(a / 3)][a % 3];
+            const cellB = board[Math.floor(b / 3)][b % 3];
+            const cellC = board[Math.floor(c / 3)][c % 3];
+
+            if (cellA === playerSymbol && cellB === playerSymbol && cellC === playerSymbol)
+            {
+                return true;
+            }
+           
+        }
+        return false;
+   }
+
+
    let currentPlayer=player1;
    intializeGame();
    
@@ -88,7 +117,8 @@ const displayController=(()=>{
 })();
 
 
-
+//To display winner in dom
+//To play against computer
 
 
 
