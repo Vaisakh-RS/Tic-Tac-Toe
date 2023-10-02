@@ -38,7 +38,7 @@ const displayController=(()=>{
    {
         gameBoard.createBoard();
         const cells = document.querySelectorAll(".cell");
-        const resultDiv=document.createElement("p");
+        const resultDiv=document.getElementById("resultDiv");
         const maxMoves=9;
         let moves=0;
     
@@ -53,12 +53,10 @@ const displayController=(()=>{
                         if(checkWin(gameBoard.board,"X"))
                         {
                             resultDiv.textContent="Player 1 Won!"
-                            boardDiv.appendChild(resultDiv);
                         }
                         else if(moves==maxMoves)
                         {
                             resultDiv.textContent="It's a Draw!"
-                            boardDiv.appendChild(resultDiv);
                         }
                     }
                 } 
@@ -70,12 +68,10 @@ const displayController=(()=>{
                         if(checkWin(gameBoard.board,"O"))
                         {
                             resultDiv.textContent="Player 2 Won!";
-                            boardDiv.appendChild(resultDiv);
                         }
                         else if(moves==maxMoves)
                         {
                             resultDiv.textContent="It's a Draw!"
-                            boardDiv.appendChild(resultDiv);
                         }
                     }
                     

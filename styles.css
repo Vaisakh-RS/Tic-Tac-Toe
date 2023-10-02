@@ -19,3 +19,10 @@ header{
     width: 450px;
     height: 450px;
 }
+
+#resultDiv{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 30px;
+    margin: 50px;
+    text-align: center;
+}
