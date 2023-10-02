@@ -15,7 +15,7 @@ const gameBoard=(()=>{
             {
                 cell=document.createElement("div");
                 cell.classList.add("cell");
-                cell.style.cssText="border:1px solid black;width:150px;height:150px;font-size:60px;display:flex;align-items:center;justify-content:center";
+                cell.style.cssText="border:1px solid black;width:150px;height:150px;font-size:60px;display:flex;align-items:center;justify-content:center;font-family:Arial";
                 boardDiv.appendChild(cell);
                 
             }
@@ -44,36 +44,45 @@ const displayController=(()=>{
     
         cells.forEach((cell,index)=>{
             cell.addEventListener("click",()=>{
-                if (currentPlayer=== player1) {
-                    if(updateBoard(index,"X"))
-                    {
-                        cell.textContent = "X";
-                        currentPlayer = player2;
-                        moves++;
-                        if(checkWin(gameBoard.board,"X"))
+                if(!gameOver)
+                {
+                    if (currentPlayer=== player1) {
+                        if(updateBoard(index,"X"))
                         {
-                            resultDiv.textContent="Player 1 Won!"
+                            cell.textContent = "X";
+                            currentPlayer = player2;
+                            moves++;
+                            if(checkWin(gameBoard.board,"X"))
+                            {
+                                resultDiv.textContent="Player 1 Won!";
+                                gameOver=true;
+                                
+                            }
+                            else if(moves==maxMoves)
+                            {
+                                resultDiv.textContent="It's a Draw!";
+                                gameOver=true;
+                            }
                         }
-                        else if(moves==maxMoves)
+                    } 
+                        else if(updateBoard(index,"O"))
                         {
-                            resultDiv.textContent="It's a Draw!"
+                            cell.textContent = "O";
+                            currentPlayer = player1;
+                            moves++;
+                            if(checkWin(gameBoard.board,"O"))
+                            {
+                                resultDiv.textContent="Player 2 Won!";
+                                gameOver=true;
+                            }
+                            else if(moves==maxMoves)
+                            {
+                                resultDiv.textContent="It's a Draw!"
+                                gameOver=true;
+                            }
                         }
-                    }
-                } 
-                    else if(updateBoard(index,"O"))
-                    {
-                        cell.textContent = "O";
-                        currentPlayer = player1;
-                        moves++;
-                        if(checkWin(gameBoard.board,"O"))
-                        {
-                            resultDiv.textContent="Player 2 Won!";
-                        }
-                        else if(moves==maxMoves)
-                        {
-                            resultDiv.textContent="It's a Draw!"
-                        }
-                    }
+                }
+                
                     
         
             });
@@ -123,6 +132,7 @@ const displayController=(()=>{
 
 
    let currentPlayer=player1;
+   let gameOver=false;
    intializeGame();
    
   
