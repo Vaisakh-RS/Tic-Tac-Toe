@@ -34,12 +34,14 @@ const displayController=(()=>{
    const player1=Player("Player 1","X");
    const player2=Player("Player 2","O");
 
+   //controls game
    function intializeGame()
    {
         gameBoard.createBoard();
+
         const cells = document.querySelectorAll(".cell");
         const resultDiv=document.getElementById("resultDiv");
-        const maxMoves=9;
+        const maxMoves=9; //to check draw
         let moves=0;
     
         cells.forEach((cell,index)=>{
@@ -82,32 +84,29 @@ const displayController=(()=>{
                             }
                         }
                 }
-                
-                    
-        
             });
         });
-       
    }
 
-  
-
 //To check if the araay index is empty and insert the symbol into the board array
-   function updateBoard(index, symbol) {
-    const row = Math.floor(index / 3);
-    const col = index % 3;
-    
-    if(gameBoard.board[row][col]==" ")
-    {
-        gameBoard.board[row][col] = symbol;
-        return true;
-    }
-    else{
-        return false;
-    }
+   function updateBoard(index, symbol) 
+   {
+        const row = Math.floor(index / 3);
+        const col = index % 3;
+        
+        if(gameBoard.board[row][col]==" ")
+        {
+            gameBoard.board[row][col] = symbol;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
         
    }
 
+   
    function checkWin(board,playerSymbol)
    {
         const winCombo=[[0,1,2],[3,4,5],[6,7,8],
@@ -137,10 +136,6 @@ const displayController=(()=>{
    
   
 })();
-
-//clean up
-//To display winner in dom
-//To play against computer
 
 
 
