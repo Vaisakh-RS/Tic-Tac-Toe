@@ -1,6 +1,7 @@
+const boardDiv=document.getElementById("board");
+
 //To create the board
 const gameBoard=(()=>{
-    const boardDiv=document.getElementById("board");
     var board=[[" "," "," "],
                [" "," "," "],
                [" "," "," "]];
@@ -37,6 +38,9 @@ const displayController=(()=>{
    {
         gameBoard.createBoard();
         const cells = document.querySelectorAll(".cell");
+        const resultDiv=document.createElement("p");
+        const maxMoves=9;
+        let moves=0;
     
         cells.forEach((cell,index)=>{
             cell.addEventListener("click",()=>{
@@ -45,25 +49,36 @@ const displayController=(()=>{
                     {
                         cell.textContent = "X";
                         currentPlayer = player2;
-                        console.log(gameBoard.board);
+                        moves++;
                         if(checkWin(gameBoard.board,"X"))
                         {
-                            console.log("Player 1 won");
+                            resultDiv.textContent="Player 1 Won!"
+                            boardDiv.appendChild(resultDiv);
+                        }
+                        else if(moves==maxMoves)
+                        {
+                            resultDiv.textContent="It's a Draw!"
+                            boardDiv.appendChild(resultDiv);
                         }
                     }
-                } else {
-                    if(updateBoard(index,"O"))
+                } 
+                    else if(updateBoard(index,"O"))
                     {
                         cell.textContent = "O";
                         currentPlayer = player1;
-                        console.log(gameBoard.board);
+                        moves++;
                         if(checkWin(gameBoard.board,"O"))
                         {
-                            console.log("Player 2 won");
+                            resultDiv.textContent="Player 2 Won!";
+                            boardDiv.appendChild(resultDiv);
+                        }
+                        else if(moves==maxMoves)
+                        {
+                            resultDiv.textContent="It's a Draw!"
+                            boardDiv.appendChild(resultDiv);
                         }
                     }
-                  
-                }
+                    
         
             });
         });
@@ -76,6 +91,7 @@ const displayController=(()=>{
    function updateBoard(index, symbol) {
     const row = Math.floor(index / 3);
     const col = index % 3;
+    
     if(gameBoard.board[row][col]==" ")
     {
         gameBoard.board[row][col] = symbol;
@@ -116,7 +132,7 @@ const displayController=(()=>{
   
 })();
 
-
+//clean up
 //To display winner in dom
 //To play against computer
 
