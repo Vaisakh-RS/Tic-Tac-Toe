@@ -56,7 +56,7 @@ const displayController=(()=>{
                             moves++;
                             if(checkWin(gameBoard.board,"X"))
                             {
-                                resultDiv.textContent="Player 1 Won!";
+                                resultDiv.textContent="Player 1 (X) Won!";
                                 gameOver=true;
                                 
                             }
@@ -74,7 +74,7 @@ const displayController=(()=>{
                             moves++;
                             if(checkWin(gameBoard.board,"O"))
                             {
-                                resultDiv.textContent="Player 2 Won!";
+                                resultDiv.textContent="Player 2 (O) Won!";
                                 gameOver=true;
                             }
                             else if(moves==maxMoves)
